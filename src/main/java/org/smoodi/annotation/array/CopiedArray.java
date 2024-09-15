@@ -3,7 +3,7 @@ package org.smoodi.annotation.array;
 import java.lang.annotation.*;
 
 /**
- * <p>{@link java.util.Collection Collection} 혹은 {@link java.lang.reflect.Array Array} 등의 타입을 가진 메소드 반환값이 새로 복사되어 반환되었음을 표시.</p>
+ * <p>원본 대상이 영향을 받지 않도록 새로 복사하여 반환된 {@link java.util.Collection Collection} 혹은 {@link java.lang.reflect.Array Array}임을 표시.</p>
  *
  * <p>아래 경우, 반환값인 {@literal List<String>}이 새로 복사되어 반환되었음을 표시함.</p>
  * <pre>
