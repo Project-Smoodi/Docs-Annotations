@@ -55,7 +55,7 @@ publishing {
     repositories {
         maven {
             name = "Docs-Annotations"
-            url = uri("https://maven.pkg.github.com/Project-Smoodi")
+            url = uri("https://maven.pkg.github.com/Project-Smoodi/Docs-Annotations")
             credentials {
                 username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
                 password = project.findProperty("gpr.token") as String? ?: System.getenv("TOKEN")
