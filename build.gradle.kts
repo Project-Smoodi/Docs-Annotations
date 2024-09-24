@@ -5,10 +5,6 @@ plugins {
 
 group = "org.smoodi.annotation"
 
-repositories {
-    mavenCentral()
-}
-
 publishing {
 
     publications {
@@ -17,7 +13,7 @@ publishing {
 
             groupId = "org.smoodi.framework"
             artifactId = "docs-annotations"
-            version = "1.0.0"
+            version = "1.1.0"
 
             pom {
                 name.set("Docs-Annotations")
