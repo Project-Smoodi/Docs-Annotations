@@ -5,6 +5,14 @@ plugins {
 
 group = "org.smoodi.annotation"
 
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
 publishing {
 
     publications {
@@ -13,10 +21,10 @@ publishing {
 
             groupId = "org.smoodi.framework"
             artifactId = "docs-annotations"
-            version = "1.1.0"
+            version = "1.1.0-SNAPSHOT"
 
             pom {
-                name.set("Docs-Annotations")
+                name.set("Docs Annotations")
                 description.set("Annotations set library for documentation.")
                 url.set("https://github.com/Project-Smoodi")
 
