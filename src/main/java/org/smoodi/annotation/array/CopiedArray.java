@@ -23,7 +23,6 @@ import java.lang.annotation.*;
  */
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.LOCAL_VARIABLE})
 @Retention(RetentionPolicy.CLASS)
-@Deprecated(forRemoval = true, since = "v1.1.0")
 @Documented
 public @interface CopiedArray {
 }
