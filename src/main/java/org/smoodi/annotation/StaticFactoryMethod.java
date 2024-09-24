@@ -15,7 +15,7 @@ import java.lang.annotation.*;
  * </pre>
  *
  * @author Daybreak312
- * @since v1.1.1
+ * @since v1.2.0
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

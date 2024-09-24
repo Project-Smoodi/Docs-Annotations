@@ -14,6 +14,9 @@ import java.lang.annotation.*;
  *         this.proxiedString.append(str);
  *     }
  * </pre>
+ *
+ * @author Daybreak312
+ * @since v1.1.0
  */
 @Target({ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.CLASS)
