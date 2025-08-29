@@ -40,6 +40,11 @@ jobs:
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
+      - name: Create gradle.properties
+        run: |
+          echo "signing.keyId=${{ secrets.GPG_KEY_ID }}" >> gradle.properties
+          echo "signing.password=${{ secrets.GPG_PASSPHRASE }}" >> gradle.properties
+
       - name: Publish to Maven Central
         run: ./gradlew publish --stacktrace
         env:
