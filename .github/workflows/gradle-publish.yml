@@ -37,6 +37,7 @@ jobs:
         run: |
           echo "${{ secrets.GPG_PRIVATE_KEY }}" > key |
           gpg --import --pinentry-mode loopback --yes --batch key
+          echo -e "trust\n5\ny\nquit" | gpg --batch --yes --passphrase-fd 0 --pinentry-mode loopback --edit-key ${{ secrets.GPG_KEY_ID }}
           gpg --list-key
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
