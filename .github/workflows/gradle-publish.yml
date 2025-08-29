@@ -33,16 +33,10 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --stacktrace
 
-      - name: Set up GPG Environment
-        run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" > key |
-          gpg --allow-secret-key-import --pinentry-mode loopback --yes --batch key
-          gpg --list-key
-        env:
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-
       - name: Publish to Maven Central
-        run: ./gradlew publish --stacktrace --info
+        run: |
+          echo "Publishing with user: ${{ env.OSSRH_USERNAME }}"
+          ./gradlew publish --stacktrace --info
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
