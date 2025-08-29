@@ -33,10 +33,10 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --stacktrace
 
-      - name: Import GPG private key
+      - name: Set up GPG Environment
         run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" > key
-          gpg --batch --passphrase ${{ secrets.GPG_PASSPHRASE }} --pinentry-mode loopback --import key
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --passphrase-fd 0 --import --pinentry-mode loopback
+          # ...
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
