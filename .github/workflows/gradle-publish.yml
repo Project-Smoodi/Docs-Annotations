@@ -33,6 +33,11 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --stacktrace
 
+      - name: Ultimate Authentication Test with cURL
+        run: |
+          echo "Attempting to authenticate with user: ${{ secrets.OSSRH_USERNAME }}"
+          curl -v -u "${{ secrets.OSSRH_USERNAME }}:${{ secrets.OSSRH_PASSWORD }}" https://s01.oss.sonatype.org/service/local/authentication/login
+
       - name: Publish to Maven Central
         run: ./gradlew publish --stacktrace --info
         env:
