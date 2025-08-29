@@ -34,9 +34,7 @@ jobs:
         run: ./gradlew build --stacktrace
 
       - name: Publish to Maven Central
-        run: |
-          echo "Publishing with user: ${{ env.OSSRH_USERNAME }}"
-          ./gradlew publish --stacktrace --info
+        run: ./gradlew publish --stacktrace --info
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
