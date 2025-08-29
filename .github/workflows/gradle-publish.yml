@@ -35,8 +35,7 @@ jobs:
 
       - name: Import GPG private key
         run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
-          echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --batch --passphrase --pinentry-mode loopback --list-secret-keys
+          echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --batch --passphrase --pinentry-mode loopback --import ${{ secrets.GPG_PRIVATE_KEY }}
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
