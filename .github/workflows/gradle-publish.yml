@@ -35,7 +35,8 @@ jobs:
 
       - name: Set up GPG Environment
         run: |
-          gpg --batch --passphrase-fd 0 --import --pinentry-mode loopback | echo "${{ secrets.GPG_PRIVATE_KEY }}"
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" > key |
+          gpg --import key
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
