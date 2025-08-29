@@ -22,7 +22,7 @@ publishing {
 
             groupId = "org.smoodi.framework"
             artifactId = "docs-annotations"
-            version = "1.2.0"
+            version = "1.3.0"
 
             pom {
                 name.set("Docs Annotations")
