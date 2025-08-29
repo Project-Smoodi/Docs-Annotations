@@ -1,9 +1,18 @@
 plugins {
     id("java")
     id("maven-publish")
+    signing
 }
 
 group = "org.smoodi.annotation"
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+}
 
 publishing {
 
@@ -13,10 +22,10 @@ publishing {
 
             groupId = "org.smoodi.framework"
             artifactId = "docs-annotations"
-            version = "1.1.0"
+            version = "1.2.0"
 
             pom {
-                name.set("Docs-Annotations")
+                name.set("Docs Annotations")
                 description.set("Annotations set library for documentation.")
                 url.set("https://github.com/Project-Smoodi")
 
@@ -46,12 +55,20 @@ publishing {
 
     repositories {
         maven {
-            name = "Docs-Annotations"
-            url = uri("https://maven.pkg.github.com/Project-Smoodi/Docs-Annotations")
+            name = "sonatype"
+            val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+
+            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+
             credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.token") as String? ?: System.getenv("TOKEN")
+                username = System.getenv("OSSRH_USERNAME")
+                password = System.getenv("OSSRH_PASSWORD")
             }
         }
     }
+}
+
+signing {
+    sign(publishing.publications["mavenJava"])
 }
