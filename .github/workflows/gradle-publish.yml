@@ -37,7 +37,7 @@ jobs:
         run: |
           echo "${{ secrets.GPG_PRIVATE_KEY }}" > key |
           gpg --import --pinentry-mode loopback --passphrase-fd 0 key |
-          echo "${{ secrets.GPG_PASSPHRASE }}"
+          ${{ secrets.GPG_PASSPHRASE }}
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
