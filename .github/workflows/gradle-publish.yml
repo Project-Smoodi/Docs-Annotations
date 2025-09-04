@@ -1,8 +1,6 @@
 name: Gradle Publishing
 
 on:
-  release:
-    types: [ created ]
   push:
     branches:
       - main
@@ -12,9 +10,7 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write
-    if: startsWith(github.event.head_commit.message, 'SNAPSHOT') || startsWith(github.event.head_commit.message, 'RELEASE')
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -31,12 +27,26 @@ jobs:
         uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
       - name: Build with Gradle
-        run: ./gradlew build --stacktrace
+        run: ./gradlew build jreleaserConfig --stacktrace
 
-      - name: Publish to Maven Central
-        run: ./gradlew publish --stacktrace --info
+      - name: Publish Release and Create GitHub Release
+        if: startsWith(github.event.head_commit.message, 'RELEASE')
+        run: ./gradlew clean publish jreleaserFullRelease --stacktrace
         env:
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
-          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSPHRASE }}
+          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_SONATYPE_USERNAME: ${{ secrets.MAVENCENTRAL_USERNAME }}
+          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_SONATYPE_PASSWORD: ${{ secrets.MAVENCENTRAL_PASSWORD }}
+          JRELEASER_SIGNING_PUBLIC_KEY: ${{ secrets.GPG_PUBLIC_KEY }}
+          JRELEASER_SIGNING_SECRET_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          JRELEASER_SIGNING_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Publish Snapshot"
+        if: startsWith(github.event.head_commit.message, 'SNAPSHOT')
+        run: ./gradlew clean publish jreleaserDeploy --stacktrace
+        env:
+          JRELEASER_DEPLOY_MAVEN_NEXUS2_SONATYPE_SNAPSHOTS_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          JRELEASER_DEPLOY_MAVEN_NEXUS2_SONATYPE_SNAPSHOTS_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.GPG_PUBLIC_KEY }}
+          JRELEASER_GPG_SECRET_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          JRELEASER_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
