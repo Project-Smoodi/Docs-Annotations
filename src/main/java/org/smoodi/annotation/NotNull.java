@@ -9,13 +9,13 @@ import java.lang.annotation.*;
  *
  * <pre>
  *     void run(
- *         &#064NotNull
+ *         &#064;NotNull
  *         Object obj
  *     );
  * </pre>
  *
  * @author Daybreak312
- * @since v1.1.1
+ * @since v1.1.0
  */
 @Target({ElementType.PARAMETER, ElementType.METHOD, ElementType.FIELD, ElementType.LOCAL_VARIABLE})
 @Retention(RetentionPolicy.RUNTIME)

@@ -8,18 +8,21 @@ import java.lang.annotation.*;
  * <p>아래의 경우, {@code init()}을 통해 초기화되는 필드이므로 어노테이션이 사용됨.</p>
  *
  * <pre>
- *     private String name;
+ *     &#064;LazyInit("init")
+ *     public class Example {
+ *         private String name;
  *
- *     private void init() {
- *         if (this.name == null) {
- *             this.name = "Smoodi";
+ *         private void init() {
+ *             if (this.name == null) {
+ *                 this.name = "Smoodi";
+ *             }
  *         }
- *     }
  *
- *     public void run() {
- *         init();
+ *         public void run() {
+ *             init();
  *
- *         ...
+ *             ...
+ *         }
  *     }
  * </pre>
  *
@@ -31,5 +34,12 @@ import java.lang.annotation.*;
 @Documented
 public @interface LazyInit {
 
+    /**
+     * <p>초기화 메서드 혹은 트리거의 이름.</p>
+     *
+     * <p>기본값은 빈 문자열이며, 이 경우 초기화 메서드가 없음을 의미.</p>
+     *
+     * @return 초기화 메서드 이름
+     */
     String value() default "";
 }

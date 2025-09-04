@@ -1,2 +1,2 @@
-rootProject.name = "Smoodi-Docs-Annotations"
+rootProject.name = "docs-annotations"
 

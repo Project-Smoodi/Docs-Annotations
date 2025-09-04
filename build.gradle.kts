@@ -1,10 +1,14 @@
+import org.jreleaser.model.Active
+
 plugins {
     id("java")
+    id("java-library")
     id("maven-publish")
-    signing
+    id("org.jreleaser") version "1.17.0"
 }
 
 group = "org.smoodi.annotation"
+version = "1.3.0"
 
 repositories {
     mavenCentral()
@@ -12,6 +16,8 @@ repositories {
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
+    withJavadocJar()
+    withSourcesJar()
 }
 
 publishing {
@@ -20,9 +26,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
 
-            groupId = "org.smoodi.framework"
             artifactId = "docs-annotations"
-            version = "1.2.0"
 
             pom {
                 name.set("Docs Annotations")
@@ -40,7 +44,6 @@ publishing {
                     developer {
                         id.set("Daybreak312")
                         name.set("Daybreak312")
-                        email.set("ty82afg12@gmail.com")
                     }
                 }
 
@@ -55,20 +58,44 @@ publishing {
 
     repositories {
         maven {
-            name = "sonatype"
-            val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-
-            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
-
-            credentials {
-                username = System.getenv("OSSRH_USERNAME")
-                password = System.getenv("OSSRH_PASSWORD")
-            }
+            name = "staging"
+            url = uri("${layout.buildDirectory}/staging-deploy") // 로컬 Staging 디렉토리 설정은 동일
         }
     }
 }
 
-signing {
-    sign(publishing.publications["mavenJava"])
+jreleaser {
+    signing {
+        active.set(Active.RELEASE)
+        armored = true
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                create("sonatype") {
+                    active.set(Active.RELEASE)
+                    url.set("https://central.sonatype.com/api/v1/publisher")
+                    stagingRepository("${layout.buildDirectory}/staging-deploy")
+                }
+            }
+            nexus2 {
+                create("sonatype-snapshots") {
+                    active.set(Active.SNAPSHOT)
+                    url.set("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                    snapshotUrl.set("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                    applyMavenCentralRules.set(true)
+                }
+            }
+        }
+    }
+    release {
+        github {
+            tagName.set("v{{projectVersion}}")
+            releaseName.set("Release v{{projectVersion}}")
+            changelog {
+                formatted.set(Active.ALWAYS)
+                preset.set("conventional-commits")
+            }
+        }
+    }
 }

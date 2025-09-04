@@ -3,7 +3,10 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-gradle.properties
+
+*.properties
+public.asc
+private.asc
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

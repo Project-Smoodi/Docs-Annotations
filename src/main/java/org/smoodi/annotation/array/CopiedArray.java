@@ -19,7 +19,7 @@ import java.lang.annotation.*;
  * </pre>
  *
  * @author Daybreak312
- * @since v1.0.0
+ * @since v1.1.0
  */
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.LOCAL_VARIABLE})
 @Retention(RetentionPolicy.CLASS)
