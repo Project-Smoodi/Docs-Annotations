@@ -28,6 +28,13 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build jreleaserConfig --stacktrace
+        env:
+          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_SONATYPE_USERNAME: ${{ secrets.MAVENCENTRAL_USERNAME }}
+          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_SONATYPE_PASSWORD: ${{ secrets.MAVENCENTRAL_PASSWORD }}
+          JRELEASER_SIGNING_PUBLIC_KEY: ${{ secrets.GPG_PUBLIC_KEY }}
+          JRELEASER_SIGNING_SECRET_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          JRELEASER_SIGNING_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Release and Create GitHub Release
         if: startsWith(github.event.head_commit.message, 'RELEASE')
@@ -35,6 +42,8 @@ jobs:
         env:
           JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_SONATYPE_USERNAME: ${{ secrets.MAVENCENTRAL_USERNAME }}
           JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_SONATYPE_PASSWORD: ${{ secrets.MAVENCENTRAL_PASSWORD }}
+          JRELEASER_DEPLOY_MAVEN_NEXUS2_SONATYPE_SNAPSHOTS_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          JRELEASER_DEPLOY_MAVEN_NEXUS2_SONATYPE_SNAPSHOTS_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           JRELEASER_SIGNING_PUBLIC_KEY: ${{ secrets.GPG_PUBLIC_KEY }}
           JRELEASER_SIGNING_SECRET_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           JRELEASER_SIGNING_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
