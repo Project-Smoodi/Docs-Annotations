@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  *
  * <p>아래의 경우, {@link java.util.List List}로 {@code TypeCasting}된 {@link java.util.ArrayList ArrayList}를 반환하므로 해당 어노테이션을 사용함</p>
  * <pre>
- *     &#064ModifiableArray
+ *     &#064;ModifiableArray
  *     public{@literal List<Object>} getList() {
  *        {@literal return new ArrayList<Object>()}
  *     }

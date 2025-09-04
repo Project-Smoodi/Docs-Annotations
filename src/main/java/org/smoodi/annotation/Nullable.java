@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * <p>아래의 경우, 반환값이 {@code null}일 수 있음을 표시.</p>
  *
  * <pre>
- *     &#064Nullable
+ *     &#064;Nullable
  *     String getName();
  * </pre>
  *

@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * <p>아래의 경우, 반환값이 {@code null}임을 표시.</p>
  *
  * <pre>
- *     &#064NullValue
+ *     &#064;NullValue
  *     String getAuthority();
  * </pre>
  *

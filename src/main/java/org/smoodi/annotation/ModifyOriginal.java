@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * <pre>
  *     private String proxiedString = "";
  *
- *     &#064ModifyOriginal
+ *     &#064;ModifyOriginal
  *     public void append(String str) {
  *         this.proxiedString.append(str);
  *     }

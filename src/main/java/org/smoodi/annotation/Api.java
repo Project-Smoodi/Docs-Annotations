@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  *
  * <p>아래의 경우, 공통 로직을 분리한 유틸리티 API이기에 사용됨.</p>
  * <pre>
- *     &#064Api
+ *     &#064;Api
  *     public getAnnotations(Object obj,{@literal Class<? extends Annotation>})
  * </pre>
  *

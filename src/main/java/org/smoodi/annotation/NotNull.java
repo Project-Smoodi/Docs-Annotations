@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  *
  * <pre>
  *     void run(
- *         &#064NotNull
+ *         &#064;NotNull
  *         Object obj
  *     );
  * </pre>

@@ -3,16 +3,16 @@ package org.smoodi.annotation;
 import java.lang.annotation.*;
 
 /**
- * <p>반환용으로 사용될 변수임을 표시.</p>
+ * <p>&#xBC18;&#xD658;&#xC6A9;&#xC73C;&#xB85C; &#xC0AC;&#xC6A9;&#xB420; &#xBCC0;&#xC218;&#xC784;&#xC744; &#xD45C;&#xC2DC;.</p>
  *
- * <p>아래의 경우, 최종 계산 결과값을 저장하는 변수이기에 어노테이션이 사용됨.</p>
+ * <p>&#xC544;&#xB798;&#xC758; &#xACBD;&#xC6B0;, &#xCD5C;&#xC885; &#xACC4;&#xC0B0; &#xACB0;&#xACFC;&#xAC12;&#xC744; &#xC800;&#xC7A5;&#xD558;&#xB294; &#xBCC0;&#xC218;&#xC774;&#xAE30;&#xC5D0; &#xC5B4;&#xB178;&#xD14C;&#xC774;&#xC158;&#xC774; &#xC0AC;&#xC6A9;&#xB428;.</p>
  * <pre>
  *     public int doOperation(int param) {
  *
- *         &#064ForReturn
+ *         &#064;ForReturn
  *         int result = 0;
  *
- *         for (int i = 0; i < 10; i++) {
+ *         for (int i = 0; i &lt; 10; i++) {
  *             result += operate(i);
  *         }
  *

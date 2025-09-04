@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  *
  * <p>아래의 경우, {@link java.util.List List} 내부에서 {@link java.util.ImmutableCollections ImmutableList}를 반환하므로 해당 어노테이션을 사용함</p>
  * <pre>
- *     &#064UnmodifiableArray
+ *     &#064;UnmodifiableArray
  *     public{@literal List<String>} getList() {
  *         return List.of(1, 2, 3);
  *     }
