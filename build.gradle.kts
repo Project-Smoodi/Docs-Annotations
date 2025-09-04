@@ -20,6 +20,14 @@ java {
     withSourcesJar()
 }
 
+tasks.named("jreleaserFullRelease") {
+    dependsOn("publish")
+}
+
+tasks.named("jreleaserDeploy") {
+    dependsOn("publish")
+}
+
 publishing {
 
     publications {
@@ -59,7 +67,7 @@ publishing {
     repositories {
         maven {
             name = "staging"
-            url = uri("${layout.buildDirectory}/staging-deploy") // 로컬 Staging 디렉토리 설정은 동일
+            url = uri(layout.buildDirectory.dir("staging-deploy").get().asFile.absolutePath) // 로컬 Staging 디렉토리 설정은 동일
         }
     }
 }
@@ -75,7 +83,7 @@ jreleaser {
                 create("sonatype") {
                     active.set(Active.RELEASE)
                     url.set("https://central.sonatype.com/api/v1/publisher")
-                    stagingRepository("${layout.buildDirectory}/staging-deploy")
+                    stagingRepository(layout.buildDirectory.dir("staging-deploy").get().asFile.absolutePath)
                 }
             }
             nexus2 {
